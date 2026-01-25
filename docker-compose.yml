@@ -1,0 +1,39 @@
+services:
+  # Single container for both frontend (Nginx) and backend (FastAPI)
+  app:
+    build: .
+    container_name: todo-app
+    restart: always
+    ports:
+      - "80:80"
+    environment:
+      - DATABASE_URL=mysql+aiomysql://root:${MYSQL_ROOT_PASSWORD}@db:3306/todo_db
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - app-network
+
+  db:
+    image: mysql:8.0
+    container_name: todo-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-todopassword}
+      MYSQL_DATABASE: todo_db
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mysql_data:

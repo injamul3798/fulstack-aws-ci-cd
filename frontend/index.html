@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZenTask | Industry Type UI</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Productivity</h1>
+            <div class="tagline">ZenTask</div>
+        </header>
+
+        <main>
+            <div class="input-group">
+                <input type="text" id="todo-input" placeholder="What's on your mind?">
+                <button id="add-btn">Add Task</button>
+            </div>
+
+            <div class="filter-bar">
+                <button class="filter-btn active" data-filter="all">All Items</button>
+                <button class="filter-btn" data-filter="active">To-do</button>
+                <button class="filter-btn" data-filter="completed">Completed</button>
+            </div>
+
+            <div class="todo-list-wrapper">
+                <ul id="todo-list">
+                    <!-- Tasks will be injected here -->
+                </ul>
+                <div class="app-footer">
+                    <span id="items-left">0 items left</span>
+                    <button id="clear-completed">Clear all completed</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="static/js/app.js"></script>
+</body>
+
+</html>
